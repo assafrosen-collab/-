@@ -76,11 +76,11 @@ details ul{margin:8px 0 0;padding-inline-start:18px;color:var(--muted);font-size
 
 <div class="app">
   <div class="stage" id="stage">
-    <div class="labels" id="labels"></div>
+    <div class="labels no-names no-areas" id="labels" hidden></div>
     <div class="hud">
       <button id="vTop" type="button">מבט מלמעלה</button>
       <button id="vIso" type="button">מבט איזומטרי</button>
-      <button id="vLbl" type="button" aria-pressed="true">הסתר כיתובים</button>
+      <button id="vLbl" type="button" aria-pressed="false">הצג כיתובים</button>
     </div>
     <div class="info" id="info" hidden></div>
   </div>
@@ -100,8 +100,8 @@ details ul{margin:8px 0 0;padding-inline-start:18px;color:var(--muted);font-size
     </div>
     <div class="sec">
       <label class="tog"><input type="checkbox" id="tSite" checked> פיתוח חוץ: קרקע, קירות, שבילים</label>
-      <label class="tog"><input type="checkbox" id="tLabels" checked> שמות חדרים</label>
-      <label class="tog"><input type="checkbox" id="tAreas" checked> שטחים (מ"ר)</label>
+      <label class="tog"><input type="checkbox" id="tLabels"> שמות חדרים</label>
+      <label class="tog"><input type="checkbox" id="tAreas"> שטחים (מ"ר)</label>
       <label class="tog"><input type="checkbox" id="tCeil"> פתיחת תקרות: הסרת הגג והפרדת הקומות</label>
       <label class="tog"><input type="checkbox" id="tCols" checked> עמודים (מהתוכנית ההנדסית)</label>
       <label class="tog"><input type="checkbox" id="tCut"> חתך אופקי בגובה 1.20 מ'</label>
@@ -1526,7 +1526,7 @@ function loop(){
   }
   requestAnimationFrame(loop);
 }
-theme(); resize(); isoView(); applyVisibility(); loop();
+theme(); resize(); isoView(); applyVisibility(); applyLabels(); loop();
 </script>
 
 </body></html>
