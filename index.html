@@ -104,7 +104,7 @@ details ul{margin:8px 0 0;padding-inline-start:18px;color:var(--muted);font-size
       <label class="tog"><input type="checkbox" id="tAreas"> שטחים (מ"ר)</label>
       <label class="tog"><input type="checkbox" id="tCeil"> פתיחת תקרות: הסרת הגג והפרדת הקומות</label>
       <label class="tog"><input type="checkbox" id="tCols"> עמודים (מהתוכנית ההנדסית)</label>
-      <label class="tog" id="tPipesRow" hidden><input type="checkbox" id="tPipes"> צנרת בקירות: מרזבים (כחול), אוורור (תכלת)</label>
+      <label class="tog" id="tPipesRow" style="display:none"><input type="checkbox" id="tPipes"> צנרת בקירות: מרזבים (כחול), אוורור (תכלת)</label>
       <label class="tog"><input type="checkbox" id="tCut"> חתך אופקי בגובה 1.20 מ'</label>
     </div>
     <div class="sec">
@@ -1384,7 +1384,7 @@ function pipeGroup(z){
   const el = document.createElement("div"); el.className = "lbl"; el.style.borderColor = PIPE_KIND[vent ? "vent" : "rain"][1];
   el.style.borderWidth = "2px"; el.textContent = p.id; pipeLayer.appendChild(el); pipeLabels.push({el, obj:o});
 });
-if ((B.pipes||[]).length) $("tPipesRow").hidden = false;
+if ((B.pipes||[]).length) $("tPipesRow").style.display = "";
 // site
 const site = groups.site || (groups.site = new THREE.Group()); scene.add(site);
 const T = B.site.terrain;
