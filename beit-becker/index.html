@@ -1560,9 +1560,13 @@ if (B.quantities) {   // finishes summary replaces the per-room list
   if (Q.sills) { head("ספי חלונות (מ' אורך, ללא ויטרינות)");
     Q.sills.forEach(x => row(x.level + " · " + x.count + " חלונות", x.length.toFixed(2)));
     row("סה\"כ ספי חלונות", Q.sills_total.toFixed(2), "tot"); }
-  if (Q.stairs) { head("מדרגות (יח')");
-    Q.stairs.forEach(x => row(x.name + " · " + x.risers + (x.factor > 1 ? " × " + x.factor : "") + (x.landings ? " + " + x.landings + " פודסט" : ""), String(x.steps)));
-    row("סה\"כ מדרגות", String(Q.stairs_total), "tot"); }
+  if (Q.stairs) {
+    const sr = x => row(x.name + " · " + x.risers + (x.factor > 1 ? " × " + x.factor : "") + (x.landings ? " + " + x.landings + " פודסט" : ""), String(x.steps));
+    const grp = (title, list) => { if (!list.length) return; head(title); list.forEach(sr);
+      row("סה\"כ " + title.split(" (")[0], String(list.reduce((t, x) => t + x.steps, 0)), "tot"); };
+    grp("מדרגות פנים (יח')", Q.stairs.filter(x => !x.site));
+    grp("מדרגות חוץ (יח')", Q.stairs.filter(x => x.site));
+  }
   $("qtySec").hidden = false; $("roomSec").hidden = true;
 }
 (B.warnings||[]).forEach(w => { const li=document.createElement("li"); li.textContent=w; $("warnings").appendChild(li); });
